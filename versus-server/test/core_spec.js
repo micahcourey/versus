@@ -30,6 +30,52 @@ describe('application logic', () => {
         }),
         entries: List.of('juice')
       }));
+    });{
+  });
+
+  describe('vote', () => {
+
+    it('creates a tally for the voted entry', () => {
+      const state = Map({
+        vote: Map({
+          pair: List.of('coffee', 'tea')
+        }),
+        entries: List()
+      });
+      const nextState = vote(state, 'coffee');
+      expect(nextState).to.equal(Map({
+        vote: Map({
+          pair: List.of('coffee', 'tea'),
+          tally: Map({
+            'coffee': 1
+          })
+        }),
+        entries: List()
+      }));
+    });
+
+    it('adds to existing tally for the voted entry', () => {
+      const state = Map({
+        vote: Map({
+          pair: List.of('coffee', 'tea'),
+          tally: Map({
+            'coffee': 3,
+            'tea': 2
+          })
+        }),
+        entries: List()
+      });
+      const nextState = vote(state, 'coffee');
+      expect(nextState).to.equal(Map({
+        vote: Map({
+          pair: List.of('coffee', 'tea'),
+          tally: Map({
+            'coffee': 4,
+            'tea': 2
+          })
+        }),
+        entries: List()
+      }));
     });
   });
 
