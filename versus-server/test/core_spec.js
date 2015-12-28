@@ -79,4 +79,23 @@ describe('application logic', () => {
     });
   });
 
+  it('puts winner of current vote back to entires', () => {
+    const state = Map({
+      vote: Map({
+        pair: List.of('coffee', 'tea'),
+        tally: Map({
+          'coffee': 4,
+          'tea': 2
+        }),
+        entries: List.of('soda', 'water', 'mineral water')
+      });
+      const nextState = next(state);
+      expect(nextState).to.equal(Map({
+        vote: Map({
+          pair: List.of()
+        })
+      }))
+    })
+  })
+
 });
