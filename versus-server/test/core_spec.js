@@ -92,10 +92,29 @@ describe('application logic', () => {
       const nextState = next(state);
       expect(nextState).to.equal(Map({
         vote: Map({
-          pair: List.of()
+          pair: List.of('soda', 'water')
+        }),
+        entries: List.of('mineral water', 'coffee')
+      }));
+    });
+
+    it('puts both from tied vote back to entries', () => {
+      const state = Map({
+        pair: List.of('coffee', 'tea'),
+        tally: Map({
+          'coffee': 3,
+          'tea': 3
         })
-      }))
-    })
-  })
+      }),
+      entries: List.of('soda', 'water', 'mineral water')
+    });
+    const nextState = next(state);
+    expect(nextState).to.equal(Map({
+      vote: Map({
+        pair: List.of('soda', 'water')
+      }),
+      entries: List.of('mineral', 'coffee', 'tea')
+    }));
+  });
 
 });
