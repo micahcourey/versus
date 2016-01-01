@@ -117,4 +117,21 @@ describe('application logic', () => {
     }));
   });
 
+  it('marks winner when just one entry left', => {
+    const state = Map({
+      vote: Map({
+        pair: List.of('coffee', 'tea'),
+        tally: Map({
+          'coffee': 4,
+          'tea': 2
+        })
+      }),
+      entries: List()
+    });
+    const nextState = next(state);
+    expect(nextState).to.equal(Map({
+      winner: 'coffee'
+    }));
+  });
+
 });
