@@ -30,7 +30,7 @@ describe('application logic', () => {
         }),
         entries: List.of('juice')
       }));
-    });{
+    });
   });
 
   describe('vote', () => {
@@ -86,20 +86,22 @@ describe('application logic', () => {
         tally: Map({
           'coffee': 4,
           'tea': 2
-        }),
-        entries: List.of('soda', 'water', 'mineral water')
-      });
-      const nextState = next(state);
-      expect(nextState).to.equal(Map({
-        vote: Map({
-          pair: List.of('soda', 'water')
-        }),
-        entries: List.of('mineral water', 'coffee')
-      }));
+        })
+      }),
+      entries: List.of('soda', 'water', 'mineral water')
     });
+    const nextState = next(state);
+    expect(nextState).to.equal(Map({
+      vote: Map({
+        pair: List.of('soda', 'water')
+      }),
+      entries: List.of('mineral water', 'coffee')
+    }));
+  });
 
-    it('puts both from tied vote back to entries', () => {
-      const state = Map({
+  it('puts both from tied vote back to entries', () => {
+    const state = Map({
+      vote: Map({
         pair: List.of('coffee', 'tea'),
         tally: Map({
           'coffee': 3,
@@ -117,7 +119,7 @@ describe('application logic', () => {
     }));
   });
 
-  it('marks winner when just one entry left', => {
+  it('marks winner when just one entry left', () => {
     const state = Map({
       vote: Map({
         pair: List.of('coffee', 'tea'),
